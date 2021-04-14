@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;KafkaConsumerController.java&apos; to &apos;ApcheKafka-3/src/main/java/com.example.test.Controller&apos;&#x0D;&#x0A;- Original project: &apos;ApcheKafka-2&apos;&#x0D;&#x0A;- Destination element: &apos;ApcheKafka-3/src/main/java/com.example.test.Controller&apos;&#x0D;&#x0A;- Original element: &apos;com.example.test.Controller.KafkaConsumerController.java&apos;" description="Copy compilation unit" destination="=ApcheKafka-3/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.test.Controller" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.example.test.Controller{KafkaConsumerController.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1617711132896" units="1" version="1.0"/>
+</session>

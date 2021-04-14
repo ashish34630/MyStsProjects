@@ -1,0 +1,110 @@
+package com.example.Controller;
+ 
+import java.util.Collection;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.common.TopicPartition;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.listener.ConsumerSeekAware;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.Model.Employee;
+import com.google.gson.Gson;
+
+ 
+//@RestController
+/*public class KafkaConsumerController  {
+ 
+    @Autowired
+    private Gson gson;
+ 
+  
+	 
+    @KafkaListener(topics = "test")
+    public void getTopics(ConsumerRecord<?, ?> record) {
+        try {
+        	System.out.println("Kafka event consumed is: " + record.value());
+            Employee model = gson.fromJson((String) record.value(), Employee.class);
+            System.out.println("Model converted value: " + model);
+            System.out.println(record.offset());
+//            acknowledgment.acknowledge();
+		} catch (Exception e) {
+
+			System.out.println("what");
+		}
+        
+    }
+}*/
+
+@RestController
+public class KafkaConsumerController implements ConsumerSeekAware  {
+	
+	 private final ThreadLocal<ConsumerSeekCallback> seekCallBack = new ThreadLocal<>();
+	
+	@Override
+		public void registerSeekCallback(ConsumerSeekCallback callback) {
+			
+			ConsumerSeekAware.super.registerSeekCallback(new ConsumerSeekCallback() {
+				
+				@Override
+				public void seekToTimestamp(String topic, int partition, long timestamp) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void seekToTimestamp(Collection<TopicPartition> topicPartitions, long timestamp) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void seekToEnd(String topic, int partition) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void seekToBeginning(String topic, int partition) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void seekRelative(String topic, int partition, long offset, boolean toCurrent) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void seek(String topic, int partition, long offset) {
+					System.out.println("Hello i am here by the way");
+					
+				}
+			});
+		}
+	
+	 
+    @Autowired
+    private Gson gson;
+ 
+  
+	 
+    @KafkaListener(topics = "test")
+    public void getTopics(ConsumerRecord<?, ?> record) {
+        try {
+        	System.out.println(this.seekCallBack.get().seekToBeginning("hjh", 0));
+        	System.out.println("Kafka event consumed is: " + record.value());
+            Employee model = gson.fromJson((String) record.value(), Employee.class);
+            System.out.println("Model converted value: " + model);
+            System.out.println(record.offset());
+//            acknowledgment.acknowledge();
+		} catch (Exception e) {
+
+			System.out.println("what");
+		}
+        
+    }
+}
+
